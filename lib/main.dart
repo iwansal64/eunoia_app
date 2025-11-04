@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miti_app/components/device/device_list.dart';
 import 'package:miti_app/components/device/title.dart';
+import 'package:miti_app/components/globals/navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,15 +39,22 @@ class DevicePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-        child: Column(
-          children: [
-            DeviceTitle(),
-            SizedBox(height: 30,),
-            Expanded(child: DeviceList()),
-          ],
-        ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              child: Column(
+                children: [
+                  DeviceTitle(),
+                  SizedBox(height: 30,),
+                  Expanded(child: DeviceList()),
+                ],
+              ),
+            ),
+          ),
+          Navbar()
+        ],
       ),
     );
   }
