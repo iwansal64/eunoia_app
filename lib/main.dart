@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:miti_app/components/device/device_list.dart';
-import 'package:miti_app/components/device/title.dart';
-import 'package:miti_app/components/globals/navbar.dart';
+import 'package:eunoia_app/components/device/device_list.dart';
+import 'package:eunoia_app/components/device/title.dart';
+import 'package:eunoia_app/components/globals/navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +15,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.sairaTextTheme()
+      ),
       home: Scaffold(
         body: DefaultTextStyle(
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color.fromARGB(255, 93, 73, 54),
-            decoration: TextDecoration.none,
+          style: GoogleFonts.saira(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              color: Color.fromARGB(255, 93, 73, 54),
+              decoration: TextDecoration.none
+            )
           ),
           child: const DevicePage()
         ),
