@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:miti_app/components/device/device_list.dart';
 import 'package:miti_app/components/device/title.dart';
 
 void main() {
@@ -13,11 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        textTheme: GoogleFonts.sairaTextTheme()
+      home: Scaffold(
+        body: DefaultTextStyle(
+          style: const TextStyle(
+            fontSize: 16,
+            color: Color.fromARGB(255, 93, 73, 54),
+            decoration: TextDecoration.none,
+          ),
+          child: const DevicePage()
+        ),
       ),
-      home: const DevicePage(),
     );
   }
 }
@@ -32,12 +38,16 @@ class DevicePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white
       ),
-      child: Column(
-        children: [
-          DeviceTitle(),
-                   
-        ],
-      )
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        child: Column(
+          children: [
+            DeviceTitle(),
+            SizedBox(height: 30,),
+            Expanded(child: DeviceList()),
+          ],
+        ),
+      ),
     );
   }
 }
