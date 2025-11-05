@@ -1,12 +1,16 @@
 import 'package:eunoia_app/components/device/device_card.dart';
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:logger/web.dart';
 
 class DeviceList extends StatelessWidget {
   const DeviceList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final Logger logger = Logger();
+    
     return Container(
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
@@ -30,6 +34,7 @@ class DeviceList extends StatelessWidget {
                     scanResult,
                   ) {
                     String deviceName = scanResult.device.platformName.isNotEmpty ? scanResult.device.platformName : scanResult.device.advName;
+                    bool isEunoiaDevice = scanResult.advertisementData.serviceUuids.contains(Guid("6edda78e-092b-47d9-8eb8-3199598c5515"));
                     
                     // If the device name is empty
                     if(deviceName.isEmpty) return null;
@@ -47,6 +52,7 @@ class DeviceList extends StatelessWidget {
                     return DeviceCard(
                       deviceName: tempDeviceName,
                       bluetoothDevice: scanResult.device,
+                      isEunoiaDevice: isEunoiaDevice,
                     );
                   }).whereType<DeviceCard>().toList(),
                 );
