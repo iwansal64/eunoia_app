@@ -15,8 +15,7 @@ class DeviceCard extends StatelessWidget {
     try {
       UseBluetoothState.setConnectingState(true);
       UseToastState.showToast("Connecting", "Connecting to $deviceName");
-      // await bluetoothDevice.connect(license: License.free, autoConnect: true);
-      await Future.delayed(Duration(seconds: 2));
+      await bluetoothDevice.connect(license: License.free, mtu: 512);
       logger.i("SUCCESS!");
       UseToastState.showToast("Success!", "Connected to $deviceName");
     } catch (e) {
