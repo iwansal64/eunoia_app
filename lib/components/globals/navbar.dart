@@ -6,85 +6,85 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: UsePageState.pageState, 
-      builder: (BuildContext context, _) {
-        return Container(
-          alignment: Alignment.center,
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
+      return Container(
+        alignment: Alignment.center,
+        child: SizedBox(
+          height: 60,
+          child: ListenableBuilder(
+            listenable: UsePageState.pageState, 
+            builder: (BuildContext context, _) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        UsePageState.setPageState(PageType.device);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: (UsePageState.pageState.value == PageType.device) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.bluetooth, color: Colors.white),
+                            const Text(
+                              "Devices",
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ),
+                  GestureDetector(
                     onTap: () {
-                      UsePageState.setPageState(PageType.device);
+                      UsePageState.setPageState(PageType.information);
                     },
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: (UsePageState.pageState.value == PageType.device) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                        color: (UsePageState.pageState.value == PageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.bluetooth, color: Colors.white,),
-                          const Text(
-                            "Devices",
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
-                          )
-                        ],
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.info, color: Colors.white,)
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ),
-                GestureDetector(
-                  onTap: () {
-                    UsePageState.setPageState(PageType.information);
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: (UsePageState.pageState.value == PageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.info, color: Colors.white,)
-                        ],
+                    )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      UsePageState.setPageState(PageType.settings);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: (UsePageState.pageState.value == PageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                       ),
-                    ),
-                  )
-                ),
-                GestureDetector(
-                  onTap: () {
-                    UsePageState.setPageState(PageType.settings);
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: (UsePageState.pageState.value == PageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.settings, color: Colors.white,)
-                        ],
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.settings, color: Colors.white,)
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ),
-              ],
-            ),
-          ),
-        );
-      }
+                    )
+                  ),
+                ],
+              );
+            },
+        ),
+      ),
     );
   }
 }

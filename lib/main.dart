@@ -1,21 +1,34 @@
 import 'package:eunoia_app/components/device/device.dart';
 import 'package:eunoia_app/components/information/information.dart';
 import 'package:eunoia_app/components/setting/setting.dart';
+import 'package:eunoia_app/util/permission.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:eunoia_app/components/globals/navbar.dart';
 import 'package:eunoia_app/hooks/use_page_state.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {    
+    super.initState();
+    checkBluetoothPermission();
+  }
+
+  @override
+  Widget build(BuildContext context) {    
     return MaterialApp(
       theme: ThemeData(
         textTheme: GoogleFonts.sairaTextTheme()
