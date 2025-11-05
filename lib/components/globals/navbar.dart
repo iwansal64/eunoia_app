@@ -18,31 +18,6 @@ class Navbar extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      UsePageState.setPageState(PageType.information);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: (UsePageState.pageState.value == PageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.info, color: Colors.white,),
-                          const Text(
-                            "Information",
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
                       UsePageState.setPageState(PageType.device);
                     },
                     child: Container(
@@ -60,6 +35,46 @@ class Navbar extends StatelessWidget {
                               color: Colors.white
                             ),
                           )
+                        ],
+                      ),
+                    ),
+                  )
+                ),
+                GestureDetector(
+                  onTap: () {
+                    UsePageState.setPageState(PageType.information);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (UsePageState.pageState.value == PageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.info, color: Colors.white,)
+                        ],
+                      ),
+                    ),
+                  )
+                ),
+                GestureDetector(
+                  onTap: () {
+                    UsePageState.setPageState(PageType.settings);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: (UsePageState.pageState.value == PageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.settings, color: Colors.white,)
                         ],
                       ),
                     ),

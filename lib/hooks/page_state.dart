@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 
 enum PageType {
   device,
-  information
+  information,
+  settings
 }
 
 class UsePageState {

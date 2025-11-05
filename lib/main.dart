@@ -1,5 +1,6 @@
 import 'package:eunoia_app/components/device/device.dart';
 import 'package:eunoia_app/components/information/information.dart';
+import 'package:eunoia_app/components/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:eunoia_app/components/globals/navbar.dart';
@@ -56,6 +57,8 @@ class PageController extends StatelessWidget {
                     return DevicePage();
                   case PageType.information:
                     return InformationPage();
+                  case PageType.settings:
+                    return SettingPage();
                 }
               }
             ),
