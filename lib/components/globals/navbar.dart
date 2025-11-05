@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eunoia_app/hooks/use_page_state.dart';
+import 'package:eunoia_app/hooks/use_home_page_state.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({ super.key });
@@ -11,19 +11,19 @@ class Navbar extends StatelessWidget {
         child: SizedBox(
           height: 60,
           child: ListenableBuilder(
-            listenable: UsePageState.pageState, 
+            listenable: UseHomePageState.pageState, 
             builder: (BuildContext context, _) {
               return Row(
                 children: [
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        UsePageState.setPageState(PageType.device);
+                        UseHomePageState.setPageState(HomePageType.device);
                       },
                       child: Container(
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: (UsePageState.pageState.value == PageType.device) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                          color: (UseHomePageState.pageState.value == HomePageType.device) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,12 +42,12 @@ class Navbar extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      UsePageState.setPageState(PageType.information);
+                      UseHomePageState.setPageState(HomePageType.information);
                     },
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: (UsePageState.pageState.value == PageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                        color: (UseHomePageState.pageState.value == HomePageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                       ),
                       child: AspectRatio(
                         aspectRatio: 1,
@@ -62,12 +62,12 @@ class Navbar extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      UsePageState.setPageState(PageType.settings);
+                      UseHomePageState.setPageState(HomePageType.settings);
                     },
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: (UsePageState.pageState.value == PageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
+                        color: (UseHomePageState.pageState.value == HomePageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                       ),
                       child: AspectRatio(
                         aspectRatio: 1,

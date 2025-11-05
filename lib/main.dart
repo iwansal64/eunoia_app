@@ -1,13 +1,10 @@
-import 'package:eunoia_app/components/device/device.dart';
 import 'package:eunoia_app/components/globals/toast.dart';
-import 'package:eunoia_app/components/information/information.dart';
-import 'package:eunoia_app/components/setting/setting.dart';
+import 'package:eunoia_app/components/pages/home.dart';
+import 'package:eunoia_app/components/pages/monitor.dart';
+import 'package:eunoia_app/hooks/use_page_state.dart';
 import 'package:eunoia_app/util/permission.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:eunoia_app/components/globals/navbar.dart';
-import 'package:eunoia_app/hooks/use_page_state.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -67,25 +64,16 @@ class PageController extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white
       ),
-      child: Column(
-        children: [
-          Expanded(
-            child: ValueListenableBuilder(
-              valueListenable: UsePageState.pageState,
-              builder: (BuildContext ctx, var value, _) {
-                switch (value) {
-                  case PageType.device: 
-                    return DevicePage();
-                  case PageType.information:
-                    return InformationPage();
-                  case PageType.settings:
-                    return SettingPage();
-                }
-              }
-            ),
-          ),
-          Navbar()
-        ],
+      child: ListenableBuilder(
+        listenable: UsePageState.pageState,
+        builder: (BuildContext context, _) {
+          switch (UsePageState.pageState.value) {
+            case PageType.home:
+              return HomePage();
+            case PageType.monitor:
+              return MonitorPage();
+          }
+        }
       ),
     );
   }

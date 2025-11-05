@@ -1,4 +1,5 @@
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
+import 'package:eunoia_app/hooks/use_page_state.dart';
 import 'package:eunoia_app/hooks/use_toast_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -31,7 +32,14 @@ class DeviceCard extends StatelessWidget {
       
       // If the bluetooth device is connected
       if(bluetoothDevice.isConnected) {
+        // Show succeess message
         UseToastState.showToast("Success!", "Connected to $deviceName");
+
+        // Wait several seconds before changing page
+        await Future.delayed(Duration(seconds: 2));
+        
+        // Change page
+        UsePageState.pageState.value = PageType.monitor;
       }
       // If its not connected
       else {

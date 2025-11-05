@@ -2,15 +2,12 @@ import 'package:eunoia_app/components/device/device_card.dart';
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:logger/web.dart';
 
 class DeviceList extends StatelessWidget {
   const DeviceList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Logger logger = Logger();
-    
     return Container(
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
