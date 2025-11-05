@@ -15,14 +15,16 @@ class InformationTitle extends StatelessWidget {
             "Information",
             style: TextStyle(
               fontSize: 38,
-              fontWeight: FontWeight.w700
+              fontWeight: FontWeight.w700,
+              height: 1
             ),
           ),
           const Text(
             "What is Microsleep?",
             style: TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w500
+              fontWeight: FontWeight.w500,
+              height: 1
             ),
           )
         ],

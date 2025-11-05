@@ -15,7 +15,8 @@ class SettingTitle extends StatelessWidget {
             "Setting",
             style: TextStyle(
               fontSize: 38,
-              fontWeight: FontWeight.w700
+              fontWeight: FontWeight.w700,
+              height: 1
             ),
           ),
         ],

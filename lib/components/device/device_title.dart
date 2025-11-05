@@ -15,14 +15,16 @@ class DeviceTitle extends StatelessWidget {
             "Devices",
             style: TextStyle(
               fontSize: 38,
-              fontWeight: FontWeight.w700
+              fontWeight: FontWeight.w700,
+              height: 1
             ),
           ),
           const Text(
             "Discover Eunoia Devices",
             style: TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w500
+              fontWeight: FontWeight.w500,
+              height: 1
             ),
           )
         ],

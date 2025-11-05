@@ -9,7 +9,7 @@ class InformationPage extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
         child: Column(
           children: [
             InformationTitle(),
