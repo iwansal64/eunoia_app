@@ -3,11 +3,17 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class UseBluetoothState {
   static ValueNotifier<bool> scanState = ValueNotifier(false);
+  static ValueNotifier<bool> connectingState = ValueNotifier(false);
   static ValueNotifier<Set<ScanResult>> scanResults = ValueNotifier({});
 
   static void setScanState(bool newState) {
-    if(scanState.value == newState) return;
+    if(UseBluetoothState.scanState.value == newState) return;
     UseBluetoothState.scanState.value = newState;
+  }
+
+  static void setConnectingState(bool newState) {
+    if(UseBluetoothState.connectingState.value == newState) return;
+    UseBluetoothState.connectingState.value = newState;
   }
 
   static void setScanResult(Set<ScanResult> newScanResult) {

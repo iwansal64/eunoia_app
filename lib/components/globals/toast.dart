@@ -7,7 +7,7 @@ class Toast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: UseToastState.isToastShowed,
+      listenable: Listenable.merge([UseToastState.isToastShowed, UseToastState.toastTitle]),
       builder: (BuildContext context, _) {
         return AnimatedPositioned(
           duration: Duration(milliseconds: 500),
