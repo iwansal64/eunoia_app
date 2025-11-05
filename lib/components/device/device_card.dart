@@ -6,7 +6,6 @@ import 'package:logger/web.dart';
 
 class DeviceCard extends StatelessWidget {
   final String deviceName;
-  final DateTime? lastSeen;
   final BluetoothDevice bluetoothDevice;
   final bool isEunoiaDevice;
 
@@ -14,7 +13,6 @@ class DeviceCard extends StatelessWidget {
     super.key,
     required this.deviceName,
     required this.bluetoothDevice,
-    this.lastSeen,
     this.isEunoiaDevice = false
   });
 
@@ -52,7 +50,6 @@ class DeviceCard extends StatelessWidget {
     return ListenableBuilder(
       listenable: UseBluetoothState.connectingState,
       builder: (BuildContext context, _) {
-        final String status = lastSeen != null ? lastSeen.toString() : (bluetoothDevice.isConnected ? "CONNECTED" : "AVAILABLE");
 
         // Create button that is depends on the status of connecting to a device or not
         return GestureDetector(
@@ -83,16 +80,31 @@ class DeviceCard extends StatelessWidget {
                       ),
                       Spacer(),
                       Container(
-                        alignment: Alignment.bottomRight,
-                        child: Opacity(
-                          opacity: lastSeen != null ? 0.5 : 1,
-                          child: Row(
-                            spacing: 5,
-                            children: [
-                              Icon(isEunoiaDevice ? Icons.verified : Icons.dangerous),
-                              Text(status)
-                            ],
-                          ),
+                        alignment: Alignment.bottomLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(isEunoiaDevice ? Icons.verified : Icons.dangerous, size: 14, color: isEunoiaDevice ? Color.fromARGB(255, 112, 148, 112) : Color.fromARGB(255, 93, 73, 54),),
+                                Text(
+                                  isEunoiaDevice ? "Verified Eunoia Device" : "Unknown Device",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: isEunoiaDevice ? Color.fromARGB(255, 112, 148, 112) : Color.fromARGB(255, 93, 73, 54)
+                                  ),
+                                )
+                              ],
+                            ),
+                            Text(
+                              bluetoothDevice.isConnected ? "CONNECTED" : "AVAILABLE",
+                              style: TextStyle(
+                                height: 1,
+                                fontWeight: bluetoothDevice.isConnected ? FontWeight.bold : FontWeight.normal,
+                                color: isEunoiaDevice ? Color.fromARGB(255, 112, 148, 112) : Color.fromARGB(255, 93, 73, 54),
+                              ),
+                            )
+                          ],
                         ),
                       )
                     ],
