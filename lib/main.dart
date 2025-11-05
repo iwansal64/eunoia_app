@@ -1,4 +1,5 @@
 import 'package:eunoia_app/components/device/device.dart';
+import 'package:eunoia_app/components/globals/toast.dart';
 import 'package:eunoia_app/components/information/information.dart';
 import 'package:eunoia_app/components/setting/setting.dart';
 import 'package:eunoia_app/util/permission.dart';
@@ -35,16 +36,23 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         body: DefaultTextStyle(
-          style: GoogleFonts.saira(
-            textStyle: const TextStyle(
-              fontSize: 16,
-              color: Color.fromARGB(255, 93, 73, 54),
-              decoration: TextDecoration.none
-            )
+            style: GoogleFonts.saira(
+              textStyle: const TextStyle(
+                fontSize: 16,
+                color: Color.fromARGB(255, 93, 73, 54),
+                decoration: TextDecoration.none
+              )
+            ),
+            child: SafeArea(
+              child: Stack(
+                children: [
+                  const PageController(), 
+                  Toast(),
+                ]
+              )
+            ),
           ),
-          child: const PageController()
-        ),
-      ),
+      )
     );
   }
 }
