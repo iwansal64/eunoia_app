@@ -4,7 +4,7 @@ import 'package:eunoia_app/components/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:eunoia_app/components/globals/navbar.dart';
-import 'package:eunoia_app/hooks/page_state.dart';
+import 'package:eunoia_app/hooks/use_page_state.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,6 @@
 import 'package:eunoia_app/components/device/device_list.dart';
 import 'package:eunoia_app/components/device/device_title.dart';
+import 'package:eunoia_app/components/device/scan_device.dart';
 import 'package:flutter/material.dart';
 
 class DevicePage extends StatelessWidget {
@@ -16,6 +17,8 @@ class DevicePage extends StatelessWidget {
             DeviceTitle(),
             SizedBox(height: 30,),
             Expanded(child: DeviceList()),
+            SizedBox(height: 10,),
+            ScanDeviceButton()
           ],
         ),
       ),

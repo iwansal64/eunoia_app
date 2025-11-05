@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:eunoia_app/hooks/page_state.dart';
+import 'package:eunoia_app/hooks/use_page_state.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar({ super.key });
