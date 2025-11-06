@@ -1,4 +1,4 @@
-package com.example.miti_app
+package com.example.eunoia_app
 
 import io.flutter.embedding.android.FlutterActivity
 
