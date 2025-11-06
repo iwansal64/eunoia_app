@@ -1,5 +1,6 @@
 import 'package:eunoia_app/components/home/device/device_card.dart';
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
+import 'package:eunoia_app/util/bluetooth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -19,7 +20,7 @@ class DeviceList extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: ListenableBuilder(
-            listenable: UseBluetoothState.scanResults,
+            listenable: Listenable.merge([UseBluetoothState.scanResults, UseBluetoothState.connectedState]),
             builder: (BuildContext context, _) {
               if (UseBluetoothState.scanResults.value.isNotEmpty) {
                 Set<String> devicesName = {};
@@ -30,7 +31,7 @@ class DeviceList extends StatelessWidget {
                   children: UseBluetoothState.scanResults.value.map((
                     scanResult,
                   ) {
-                    String deviceName = scanResult.device.platformName.isNotEmpty ? scanResult.device.platformName : scanResult.device.advName;
+                    String deviceName = getBluetoothDeviceName(scanResult.device);
                     bool isEunoiaDevice = scanResult.advertisementData.serviceUuids.contains(Guid("6edda78e-092b-47d9-8eb8-3199598c5515"));
                     
                     // If the device name is empty

@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 enum HomePageType {
   device,
   information,
-  settings,
 }
 
 class UseHomePageState {

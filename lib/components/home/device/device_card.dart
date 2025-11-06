@@ -17,13 +17,30 @@ class DeviceCard extends StatelessWidget {
     this.isEunoiaDevice = false
   });
 
+  void goToMontior() {
+    // Set event listener
+    bluetoothDevice.connectionState.listen((BluetoothConnectionState state) {
+      if(state == BluetoothConnectionState.disconnected) {
+        UseBluetoothState.setConnectedState(false);
+      }
+      else if(state == BluetoothConnectionState.connected) {
+        UseBluetoothState.setConnectedState(true);
+      }
+    });
+    
+    // Set the choosen device
+    UseBluetoothState.setChoosenDevice(bluetoothDevice);
+    
+    // Change page
+    UsePageState.setPageState(PageType.monitor);
+  }
+
   Future<void> connectToDevice() async {
     final Logger logger = Logger();
 
     // If it's already connected
     if(bluetoothDevice.isConnected) {
-      // Change page
-      UsePageState.setPageState(PageType.monitor);
+      goToMontior();
       return;
     }
 
@@ -45,8 +62,7 @@ class DeviceCard extends StatelessWidget {
         // Wait several seconds before changing page
         await Future.delayed(Duration(seconds: 2));
         
-        // Change page
-        UsePageState.setPageState(PageType.monitor);
+        goToMontior();
       }
       // If its not connected
       else {

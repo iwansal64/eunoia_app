@@ -13,6 +13,7 @@ class InformationPage extends StatelessWidget {
       child: Column(
         children: [
           InformationTitle(),
+          SizedBox(height: 50,),
           Expanded(
             child: InformationContents()
           )
