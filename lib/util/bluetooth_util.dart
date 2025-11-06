@@ -11,7 +11,19 @@ String getBluetoothDeviceName(BluetoothDevice device) {
 }
 
 void initializeEunoiaDataCommunication(BluetoothDevice device) async {
-  final List<BluetoothService> servicesList = await device.discoverServices(timeout: 10);
+  List<BluetoothService> servicesList = [];
+  
+  // Wait to device to connect
+  for (var i = 0; i < 10; i++) {
+    try {
+      servicesList = await device.discoverServices(timeout: 10);
+      if(device.isConnected) break;
+    }
+    on FlutterBluePlusException catch (_) {
+      await Future.delayed(Duration(milliseconds: 500)); 
+    }
+  }
+  
   
   // Find the service
   final BluetoothService? sensorService = findOrNull(servicesList, (service) => service.uuid == Guid(sensorServiceUUID));

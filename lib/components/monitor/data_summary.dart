@@ -42,7 +42,7 @@ class DataAverageBPM extends StatelessWidget {
     return ListenableBuilder(
       listenable: UseBPMDataState.bpmDataState,
       builder: (BuildContext context, _) {
-        return Text("${UseBPMDataState.bpmDataState.value.last} BPM");
+        return Text("${UseBPMDataState.bpmDataState.value.lastOrNull ?? "-"} BPM");
       }
     );
   }
@@ -57,15 +57,18 @@ class Status extends StatelessWidget {
     return ListenableBuilder(
       listenable: UseBPMDataState.bpmDataState,
       builder: (BuildContext context, _) {
-        int bpm = UseBPMDataState.bpmDataState.value.last;
-        if(bpm >= 120) {
-          return const Text("Stressed", style: TextStyle(color: Color.fromARGB(255, 224, 45, 0)),);
+        int? bpm = UseBPMDataState.bpmDataState.value.lastOrNull;
+        if(bpm == null) {
+          return const Text("-");
+        }
+        else if(bpm >= 120) {
+          return const Text("Stressed", style: TextStyle(color: Color.fromARGB(255, 28, 53, 112)),);
         }
         else if(bpm < 120 && bpm >= 60) {
-          return const Text("Stable", style: TextStyle(color: Color.fromARGB(255, 53, 187, 0)),);
+          return const Text("Stable", style: TextStyle(color: Color.fromARGB(255, 111, 145, 40)),);
         }
         else {
-          return const Text("Relaxed", style: TextStyle(color: Color.fromARGB(255, 26, 141, 235)),);
+          return const Text("Relaxed", style: TextStyle(color: Color.fromARGB(255, 28, 53, 112)),);
         }
       }
     );
