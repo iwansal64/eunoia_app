@@ -20,6 +20,13 @@ class DeviceCard extends StatelessWidget {
   Future<void> connectToDevice() async {
     final Logger logger = Logger();
 
+    // If it's already connected
+    if(bluetoothDevice.isConnected) {
+      // Change page
+      UsePageState.setPageState(PageType.monitor);
+      return;
+    }
+
     try {
       // Set connecting state to true
       UseBluetoothState.setConnectingState(true);

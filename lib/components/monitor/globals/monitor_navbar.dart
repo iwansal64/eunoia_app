@@ -60,7 +60,7 @@ class MonitorNavbar extends StatelessWidget {
                           children: [
                             Icon(Icons.info, color: Colors.white),
                             const Text(
-                              "Information",
+                              "Info",
                               style: TextStyle(
                                 color: Colors.white
                               ),
