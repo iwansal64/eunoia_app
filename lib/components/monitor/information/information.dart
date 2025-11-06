@@ -1,3 +1,4 @@
+import 'package:eunoia_app/components/monitor/information/information_contents.dart';
 import 'package:eunoia_app/components/monitor/information/information_title.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,10 @@ class InformationPage extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          InformationTitle()
+          InformationTitle(),
+          Expanded(
+            child: InformationContents()
+          )
         ],
       ),
     );

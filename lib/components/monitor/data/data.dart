@@ -9,13 +9,10 @@ class DataPage extends StatelessWidget {
 
     return Container(
       alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.all(15),
-        child: Column(
-          children: [
-            DataTitle()
-          ],
-        ),
+      child: Column(
+        children: [
+          DataTitle()
+        ],
       ),
     );
   }

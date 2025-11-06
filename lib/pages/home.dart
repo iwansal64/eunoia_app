@@ -1,5 +1,5 @@
 import 'package:eunoia_app/components/home/device/device.dart';
-import 'package:eunoia_app/components/globals/navbar.dart';
+import 'package:eunoia_app/components/home/globals/home_navbar.dart';
 import 'package:eunoia_app/components/home/about/about.dart';
 import 'package:eunoia_app/components/home/setting/setting.dart';
 import 'package:eunoia_app/hooks/use_home_page_state.dart';
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Navbar(),
+        HomeNavbar(),
       ],
     );
   }

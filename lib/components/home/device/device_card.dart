@@ -39,7 +39,7 @@ class DeviceCard extends StatelessWidget {
         await Future.delayed(Duration(seconds: 2));
         
         // Change page
-        UsePageState.pageState.value = PageType.monitor;
+        UsePageState.setPageState(PageType.monitor);
       }
       // If its not connected
       else {
