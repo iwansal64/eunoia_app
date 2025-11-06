@@ -1,6 +1,6 @@
-import 'package:eunoia_app/components/device/device_list.dart';
-import 'package:eunoia_app/components/device/device_title.dart';
-import 'package:eunoia_app/components/device/scan_device.dart';
+import 'package:eunoia_app/components/home/device/device_list.dart';
+import 'package:eunoia_app/components/home/device/device_title.dart';
+import 'package:eunoia_app/components/home/device/scan_device.dart';
 import 'package:flutter/material.dart';
 
 class DevicePage extends StatelessWidget {

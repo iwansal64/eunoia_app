@@ -1,7 +1,7 @@
-import 'package:eunoia_app/components/device/device.dart';
+import 'package:eunoia_app/components/home/device/device.dart';
 import 'package:eunoia_app/components/globals/navbar.dart';
-import 'package:eunoia_app/components/information/information.dart';
-import 'package:eunoia_app/components/setting/setting.dart';
+import 'package:eunoia_app/components/home/information/information.dart';
+import 'package:eunoia_app/components/home/setting/setting.dart';
 import 'package:eunoia_app/hooks/use_home_page_state.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:eunoia_app/components/information/information_title.dart';
+import 'package:eunoia_app/components/home/information/information_title.dart';
 import 'package:flutter/material.dart';
 
 class InformationPage extends StatelessWidget {

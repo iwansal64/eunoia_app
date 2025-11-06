@@ -1,6 +1,6 @@
 import 'package:eunoia_app/components/globals/toast.dart';
-import 'package:eunoia_app/components/pages/home.dart';
-import 'package:eunoia_app/components/pages/monitor.dart';
+import 'package:eunoia_app/pages/home.dart';
+import 'package:eunoia_app/pages/monitor.dart';
 import 'package:eunoia_app/hooks/use_page_state.dart';
 import 'package:eunoia_app/util/permission.dart';
 import 'package:flutter/material.dart';
