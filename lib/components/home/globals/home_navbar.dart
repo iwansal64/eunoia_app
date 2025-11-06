@@ -20,7 +20,9 @@ class HomeNavbar extends StatelessWidget {
                       onTap: () {
                         UseHomePageState.setPageState(HomePageType.device);
                       },
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: (UseHomePageState.pageState.value == HomePageType.device) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
@@ -40,41 +42,28 @@ class HomeNavbar extends StatelessWidget {
                       ),
                     )
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      UseHomePageState.setPageState(HomePageType.information);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: (UseHomePageState.pageState.value == HomePageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
-                      ),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.info, color: Colors.white,)
-                          ],
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        UseHomePageState.setPageState(HomePageType.information);
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: (UseHomePageState.pageState.value == HomePageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
                         ),
-                      ),
-                    )
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      UseHomePageState.setPageState(HomePageType.settings);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: (UseHomePageState.pageState.value == HomePageType.settings) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
-                      ),
-                      child: AspectRatio(
-                        aspectRatio: 1,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.settings, color: Colors.white,)
+                            Icon(Icons.lightbulb, color: Colors.white),
+                            const Text(
+                              "About",
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                            )
                           ],
                         ),
                       ),

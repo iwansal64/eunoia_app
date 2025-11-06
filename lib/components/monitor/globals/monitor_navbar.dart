@@ -21,7 +21,9 @@ class MonitorNavbar extends StatelessWidget {
                       onTap: () {
                         UseMonitorPageState.setPageState(MonitorPageType.data);
                       },
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: (UseMonitorPageState.pageState.value == MonitorPageType.data) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
@@ -46,7 +48,9 @@ class MonitorNavbar extends StatelessWidget {
                       onTap: () {
                         UseMonitorPageState.setPageState(MonitorPageType.information);
                       },
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeOut,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: (UseMonitorPageState.pageState.value == MonitorPageType.information) ? Color.fromARGB(255, 162, 194, 119) : Color.fromARGB(255, 112, 148, 112)
