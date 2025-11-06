@@ -1,8 +1,8 @@
-import 'package:eunoia_app/components/home/information/information_title.dart';
+import 'package:eunoia_app/components/home/about/about_title.dart';
 import 'package:flutter/material.dart';
 
-class InformationPage extends StatelessWidget {
-  const InformationPage({ super.key });
+class AboutPage extends StatelessWidget {
+  const AboutPage({ super.key });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class InformationPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
         child: Column(
           children: [
-            InformationTitle(),
+            AboutTitle(),
           ],
         ),
       ),

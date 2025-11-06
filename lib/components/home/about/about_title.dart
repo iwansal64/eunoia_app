@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InformationTitle extends StatelessWidget {
-  const InformationTitle({ super.key });
+class AboutTitle extends StatelessWidget {
+  const AboutTitle({ super.key });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class InformationTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Information",
+            "About",
             style: TextStyle(
               fontSize: 38,
               fontWeight: FontWeight.w700,
