@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InformationTitle extends StatelessWidget {
-  const InformationTitle({ super.key });
+class MonitorTitle extends StatelessWidget {
+  const MonitorTitle({ super.key });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class InformationTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Information",
+            "Sensor Data",
             style: TextStyle(
               fontSize: 38,
               fontWeight: FontWeight.w700,
@@ -21,7 +21,7 @@ class InformationTitle extends StatelessWidget {
             ),
           ),
           const Text(
-            "Device Information",
+            "Realtime Heart-rate Monitor",
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,

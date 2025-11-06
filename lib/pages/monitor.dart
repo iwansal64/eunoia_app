@@ -1,8 +1,8 @@
-import 'package:eunoia_app/components/monitor/data/data.dart';
-import 'package:eunoia_app/components/monitor/globals/monitor_navbar.dart';
-import 'package:eunoia_app/components/monitor/information/information.dart';
-import 'package:eunoia_app/hooks/use_monitor_page_state.dart';
+import 'package:eunoia_app/components/monitor/disconnect_device.dart';
 import 'package:flutter/material.dart';
+import 'package:eunoia_app/components/monitor/device_info.dart';
+import 'package:eunoia_app/components/monitor/monitor_title.dart';
+import 'package:eunoia_app/components/monitor/data_summary.dart';
 
 class MonitorPage extends StatelessWidget {
   const MonitorPage({ super.key });
@@ -17,20 +17,21 @@ class MonitorPage extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(40),
-              child: ListenableBuilder(
-                listenable: UseMonitorPageState.pageState,
-                builder: (BuildContext context, _) {
-                  switch (UseMonitorPageState.pageState.value) {
-                    case MonitorPageType.information:
-                      return InformationPage();
-                    case MonitorPageType.data:
-                      return DataPage();
-                  }
-                }
-              )
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    MonitorTitle(),
+                    SizedBox(height: 15,),
+                    DeviceInfo(),
+                    DataSummary(),
+                    Spacer(),
+                    DisconnectDevice(),
+                  ],
+                ),
+              ),
             ),
           ),
-          MonitorNavbar()
         ],
       ),
     );

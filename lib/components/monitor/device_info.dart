@@ -1,14 +1,19 @@
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:flutter/material.dart';
 
-class InformationContents extends StatelessWidget {
-  const InformationContents({ super.key });
+class DeviceInfo extends StatelessWidget {
+  const DeviceInfo({ super.key });
   
   @override
   Widget build(BuildContext context) {
 
     return Container(
       alignment: Alignment.topCenter,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 246, 242, 229),
+        border: BoxBorder.all(width: 2, color: Color.fromARGB(255, 93, 73, 54)),
+        borderRadius: BorderRadius.circular(15)
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
