@@ -6,29 +6,31 @@ import 'package:eunoia_app/hooks/use_home_page_state.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({ super.key });
-  
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       children: [
         Expanded(
-          child: ValueListenableBuilder(
-            valueListenable: UseHomePageState.pageState,
-            builder: (BuildContext ctx, var value, _) {
-              switch (value) {
-                case HomePageType.device: 
-                  return DevicePage();
-                case HomePageType.information:
-                  return AboutPage();
-                case HomePageType.settings:
-                  return SettingPage();
-              }
-            }
+          child: Padding(
+            padding: EdgeInsets.all(40),
+            child: ValueListenableBuilder(
+              valueListenable: UseHomePageState.pageState,
+              builder: (BuildContext ctx, var value, _) {
+                switch (value) {
+                  case HomePageType.device:
+                    return DevicePage();
+                  case HomePageType.information:
+                    return AboutPage();
+                  case HomePageType.settings:
+                    return SettingPage();
+                }
+              },
+            ),
           ),
         ),
-        Navbar()
+        Navbar(),
       ],
     );
   }

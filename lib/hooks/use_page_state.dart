@@ -6,7 +6,7 @@ enum PageType {
 }
 
 class UsePageState {
-  static ValueNotifier<PageType> pageState = ValueNotifier(PageType.home);
+  static ValueNotifier<PageType> pageState = ValueNotifier(PageType.monitor);
 
   static void setPageState(PageType newPageType) {
     if(pageState.value == newPageType) return;

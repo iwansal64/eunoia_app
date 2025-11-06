@@ -8,13 +8,10 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
-        child: Column(
-          children: [
-            SettingTitle(),
-          ],
-        ),
+      child: Column(
+        children: [
+          SettingTitle(),
+        ],
       ),
     );
   }

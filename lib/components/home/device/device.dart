@@ -10,17 +10,14 @@ class DevicePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 25),
-        child: Column(
-          children: [
-            DeviceTitle(),
-            SizedBox(height: 30,),
-            Expanded(child: DeviceList()),
-            SizedBox(height: 10,),
-            ScanDeviceButton()
-          ],
-        ),
+      child: Column(
+        children: [
+          DeviceTitle(),
+          SizedBox(height: 30,),
+          Expanded(child: DeviceList()),
+          SizedBox(height: 10,),
+          ScanDeviceButton()
+        ],
       ),
     );
   }

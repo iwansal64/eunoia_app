@@ -1,16 +1,17 @@
-import 'package:eunoia_app/components/home/about/about_title.dart';
+import 'package:eunoia_app/components/monitor/information/information_title.dart';
 import 'package:flutter/material.dart';
 
-class AboutPage extends StatelessWidget {
-  const AboutPage({ super.key });
+class InformationPage extends StatelessWidget {
+  const InformationPage({ super.key });
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       alignment: Alignment.center,
       child: Column(
         children: [
-          AboutTitle(),
+          InformationTitle()
         ],
       ),
     );
