@@ -1,6 +1,7 @@
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:eunoia_app/hooks/use_page_state.dart';
 import 'package:eunoia_app/hooks/use_toast_state.dart';
+import 'package:eunoia_app/util/bluetooth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/web.dart';
@@ -33,6 +34,9 @@ class DeviceCard extends StatelessWidget {
     
     // Change page
     UsePageState.setPageState(PageType.monitor);
+
+    // Initialize bluetooth data communication 
+    initializeEunoiaDataCommunication(bluetoothDevice);
   }
 
   Future<void> connectToDevice() async {

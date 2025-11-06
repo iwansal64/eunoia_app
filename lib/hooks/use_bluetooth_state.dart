@@ -1,4 +1,4 @@
-import 'package:eunoia_app/util/bluetooth.dart';
+import 'package:eunoia_app/util/bluetooth_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 

@@ -1,6 +1,6 @@
 import 'package:eunoia_app/components/home/device/device_card.dart';
 import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
-import 'package:eunoia_app/util/bluetooth.dart';
+import 'package:eunoia_app/util/bluetooth_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
