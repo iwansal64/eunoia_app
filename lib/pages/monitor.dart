@@ -22,10 +22,11 @@ class MonitorPage extends StatelessWidget {
                 child: Column(
                   children: [
                     MonitorTitle(),
-                    SizedBox(height: 15,),
+                    SizedBox(height: 25,),
                     DeviceInfo(),
-                    DataSummary(),
-                    Spacer(),
+                    SizedBox(height: 15,),
+                    Expanded(child: DataSummary()),
+                    SizedBox(height: 30,),
                     DisconnectDevice(),
                   ],
                 ),
