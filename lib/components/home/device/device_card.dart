@@ -18,7 +18,13 @@ class DeviceCard extends StatelessWidget {
     this.isEunoiaDevice = false
   });
 
-  void goToMontior() {
+  Future<void> goToMontior() async {
+    // Initialize bluetooth data communication 
+    if(!(await initializeEunoiaDataCommunication(bluetoothDevice))) {
+      UseToastState.showToast("Error", "Initialization with ${getBluetoothDeviceName(bluetoothDevice)} has failed.");
+      return;
+    }
+
     // Set event listener
     bluetoothDevice.connectionState.listen((BluetoothConnectionState state) {
       if(state == BluetoothConnectionState.disconnected) {
@@ -34,17 +40,19 @@ class DeviceCard extends StatelessWidget {
     
     // Change page
     UsePageState.setPageState(PageType.monitor);
-
-    // Initialize bluetooth data communication 
-    initializeEunoiaDataCommunication(bluetoothDevice);
   }
 
   Future<void> connectToDevice() async {
+    if(!isEunoiaDevice) {
+      UseToastState.showToast("Error!", "Can't connect to an unknown device. Try again with verified Eunoia device!", duration: Duration(seconds: 5));
+      return;
+    }
+    
     final Logger logger = Logger();
 
     // If it's already connected
     if(bluetoothDevice.isConnected) {
-      goToMontior();
+      await goToMontior();
       return;
     }
 
@@ -66,7 +74,7 @@ class DeviceCard extends StatelessWidget {
         // Wait several seconds before changing page
         await Future.delayed(Duration(seconds: 2));
         
-        goToMontior();
+        await goToMontior();
       }
       // If its not connected
       else {
