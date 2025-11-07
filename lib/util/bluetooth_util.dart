@@ -10,7 +10,7 @@ String getBluetoothDeviceName(BluetoothDevice device) {
   return device.platformName.isNotEmpty ? device.platformName : device.advName;
 }
 
-void initializeEunoiaDataCommunication(BluetoothDevice device) async {
+Future<bool> initializeEunoiaDataCommunication(BluetoothDevice device) async {
   List<BluetoothService> servicesList = [];
   
   // Wait to device to connect
@@ -27,11 +27,11 @@ void initializeEunoiaDataCommunication(BluetoothDevice device) async {
   
   // Find the service
   final BluetoothService? sensorService = findOrNull(servicesList, (service) => service.uuid == Guid(sensorServiceUUID));
-  if(sensorService == null) return;
+  if(sensorService == null) return false;
 
   // Find the characteristic
   final BluetoothCharacteristic? bpmCharacteristic = findOrNull(sensorService.characteristics, (characteristic) => characteristic.uuid == Guid(bpmCharacteristicsUUID));
-  if(bpmCharacteristic == null) return;
+  if(bpmCharacteristic == null) return false;
 
   // Set notify for the characteristic
   await bpmCharacteristic.setNotifyValue(true);
@@ -61,4 +61,35 @@ void initializeEunoiaDataCommunication(BluetoothDevice device) async {
     // If the data is indeed a number, save to the state
     UseBPMDataState.addBPMData(dataNumber);
   });
+
+  return true;
+}
+
+void deinitializeEunoiaDataCommunication(BluetoothDevice device) async {
+  List<BluetoothService> servicesList = [];
+  
+  // Wait to device to connect
+  for (var i = 0; i < 10; i++) {
+    try {
+      servicesList = await device.discoverServices(timeout: 10);
+      if(device.isConnected) break;
+    }
+    on FlutterBluePlusException catch (_) {
+      await Future.delayed(Duration(milliseconds: 500)); 
+    }
+  }
+  
+  
+  // Find the service
+  final BluetoothService? sensorService = findOrNull(servicesList, (service) => service.uuid == Guid(sensorServiceUUID));
+  if(sensorService == null) return;
+
+  // Find the characteristic
+  final BluetoothCharacteristic? bpmCharacteristic = findOrNull(sensorService.characteristics, (characteristic) => characteristic.uuid == Guid(bpmCharacteristicsUUID));
+  if(bpmCharacteristic == null) return;
+
+  // Set notify for the characteristic
+  await bpmCharacteristic.setNotifyValue(false);
+  await device.disconnect();
+  await Future.delayed(Duration(milliseconds: 300));
 }
