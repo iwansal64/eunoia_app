@@ -22,6 +22,8 @@ class DisconnectDevice extends StatelessWidget {
         child: ListenableBuilder(
           listenable: UseBluetoothState.choosenDevice, 
           builder: (BuildContext context, _) {
+
+            EunoiaDeviceData? deviceData = UseBluetoothState.choosenDevice.value;
             
             return Container(
               alignment: Alignment.center,
@@ -32,7 +34,7 @@ class DisconnectDevice extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.all(15),
-                child: const Text("Disconnect"),
+                child: Text((deviceData != null && deviceData.bluetoothDevice.isConnected) ? "Disconnect" : "Back to Menu"),
               ),
             );
           }
