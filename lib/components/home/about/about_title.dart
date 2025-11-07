@@ -12,21 +12,21 @@ class AboutTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "About",
+            "Microsleep",
             style: TextStyle(
-              fontSize: 38,
+              fontSize: 44,
               fontWeight: FontWeight.w700,
               height: 1
             ),
           ),
           const Text(
-            "What is Microsleep?",
+            "Tidur singkat yang membahayakan kesalamatan",
             style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              height: 1
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              height: 1,
             ),
-          )
+          ),
         ],
       ),
     );
