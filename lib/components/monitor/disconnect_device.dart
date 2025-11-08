@@ -1,14 +1,14 @@
-import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:eunoia_app/hooks/use_page_state.dart';
+import 'package:eunoia_app/hooks/use_websocket_state.dart';
 import 'package:flutter/material.dart';
 
 class DisconnectDevice extends StatelessWidget {
   const DisconnectDevice({ super.key });
 
   Future<void> disconnect() async {
-    EunoiaDeviceData? choosenDevice = UseBluetoothState.choosenDevice.value;
-    if(choosenDevice != null && choosenDevice.bluetoothDevice.isConnected) {
-      await choosenDevice.bluetoothDevice.disconnect();
+    EunoiaDeviceData? choosenDevice = UseWebsocketState.choosenDevice.value;
+    if(choosenDevice != null && UseWebsocketState.connectedState.value) {
+      await choosenDevice.wsChannel.sink.close();
     }
 
     UsePageState.setPageState(PageType.home);
@@ -20,10 +20,14 @@ class DisconnectDevice extends StatelessWidget {
     return GestureDetector(
         onTap: disconnect,
         child: ListenableBuilder(
-          listenable: UseBluetoothState.choosenDevice, 
+          listenable: Listenable.merge([
+            UseWebsocketState.choosenDevice,
+            UseWebsocketState.connectedState
+          ]), 
           builder: (BuildContext context, _) {
 
-            EunoiaDeviceData? deviceData = UseBluetoothState.choosenDevice.value;
+            EunoiaDeviceData? deviceData = UseWebsocketState.choosenDevice.value;
+            bool isConnected = UseWebsocketState.connectedState.value;
             
             return Container(
               alignment: Alignment.center,
@@ -34,7 +38,7 @@ class DisconnectDevice extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.all(15),
-                child: Text((deviceData != null && deviceData.bluetoothDevice.isConnected) ? "Disconnect" : "Back to Menu"),
+                child: Text((deviceData != null && isConnected) ? "Disconnect" : "Back to Menu"),
               ),
             );
           }

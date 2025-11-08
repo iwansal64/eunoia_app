@@ -1,8 +1,6 @@
 import 'package:eunoia_app/components/home/device/device_card.dart';
-import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
-import 'package:eunoia_app/util/bluetooth_util.dart';
+import 'package:eunoia_app/hooks/use_websocket_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class DeviceList extends StatelessWidget {
   const DeviceList({super.key});
@@ -21,27 +19,20 @@ class DeviceList extends StatelessWidget {
         child: SingleChildScrollView(
           child: ListenableBuilder(
             listenable: Listenable.merge([
-              UseBluetoothState.scanResults,
-              UseBluetoothState.connectedState,
+              UseWebsocketState.availableWiFiAccessPoints,
+              UseWebsocketState.connectedState,
             ]),
             builder: (BuildContext context, _) {
-              if (UseBluetoothState.scanResults.value.isNotEmpty) {
+              if (UseWebsocketState.availableWiFiAccessPoints.value.isNotEmpty) {
                 Set<String> devicesName = {};
                 List<DeviceCard> devicesList = [];
 
                 // Add the scan results
                 devicesList.addAll(
-                  UseBluetoothState.scanResults.value
-                      .map((scanResult) {
-                        String deviceName = getBluetoothDeviceName(
-                          scanResult.device,
-                        );
-                        bool isEunoiaDevice = scanResult
-                            .advertisementData
-                            .serviceUuids
-                            .contains(
-                              Guid("6edda78e-092b-47d9-8eb8-3199598c5515"),
-                            );
+                  UseWebsocketState.availableWiFiAccessPoints.value
+                      .map((accessPoint) {
+                        String deviceName = accessPoint.ssid;
+                        bool isEunoiaDevice = accessPoint.ssid.startsWith("EUNOIA-BOX-");
 
                         // If the device name is empty
                         if (deviceName.isEmpty) return null;
@@ -58,7 +49,7 @@ class DeviceList extends StatelessWidget {
 
                         return DeviceCard(
                           deviceName: tempDeviceName,
-                          bluetoothDevice: scanResult.device,
+                          accessPointDevice: accessPoint,
                           isEunoiaDevice: isEunoiaDevice,
                         );
                       })

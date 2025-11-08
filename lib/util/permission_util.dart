@@ -1,11 +1,9 @@
 import 'package:permission_handler/permission_handler.dart';
 
-Future<bool> checkBluetoothPermission() async {
-  List<PermissionStatus> bluetoothStatus = (await [
-    Permission.bluetooth,
-    Permission.bluetoothConnect,
-    Permission.bluetoothScan,
+Future<bool> checkPermission() async {
+  List<PermissionStatus> permissionStatus = (await [
+    Permission.location
   ].request()).values.toList();
 
-  return bluetoothStatus.every((status) => status.isGranted);
+  return permissionStatus.every((status) => status.isGranted);
 }

@@ -1,4 +1,4 @@
-import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
+import 'package:eunoia_app/hooks/use_websocket_state.dart';
 import 'package:flutter/material.dart';
 
 class DeviceInfo extends StatelessWidget {
@@ -18,9 +18,9 @@ class DeviceInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ListenableBuilder(
-            listenable: Listenable.merge([UseBluetoothState.choosenDevice, UseBluetoothState.connectedState]),
+            listenable: Listenable.merge([UseWebsocketState.choosenDevice, UseWebsocketState.connectedState]),
             builder: (BuildContext context, _) {
-              EunoiaDeviceData? eunoiaDeviceData = UseBluetoothState.choosenDevice.value;
+              EunoiaDeviceData? eunoiaDeviceData = UseWebsocketState.choosenDevice.value;
 
               if(eunoiaDeviceData == null) {
                 return Padding(
@@ -38,12 +38,12 @@ class DeviceInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(eunoiaDeviceData.bluetoothDevice.isConnected ? Icons.watch : Icons.watch_off, size: 54,),
+                    Icon(UseWebsocketState.connectedState.value ? Icons.watch : Icons.watch_off, size: 54,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          eunoiaDeviceData.deviceName,
+                          eunoiaDeviceData.accessPoint.ssid,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold
@@ -54,9 +54,9 @@ class DeviceInfo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           spacing: 5,
                           children: [
-                            Icon(eunoiaDeviceData.bluetoothDevice.isConnected ? Icons.check : Icons.clear),
+                            Icon(UseWebsocketState.connectedState.value ? Icons.check : Icons.clear),
                             Text(
-                              eunoiaDeviceData.bluetoothDevice.isConnected ? "Connected!" : "Not Connected"
+                              UseWebsocketState.connectedState.value ? "Connected!" : "Not Connected"
                             )
                           ],
                         )

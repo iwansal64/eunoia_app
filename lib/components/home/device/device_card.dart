@@ -1,46 +1,26 @@
-import 'package:eunoia_app/hooks/use_bluetooth_state.dart';
 import 'package:eunoia_app/hooks/use_page_state.dart';
 import 'package:eunoia_app/hooks/use_toast_state.dart';
-import 'package:eunoia_app/util/bluetooth_util.dart';
+import 'package:eunoia_app/hooks/use_websocket_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:logger/web.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:wifi_scan/wifi_scan.dart';
+import 'package:wifi_iot/wifi_iot.dart';
+import 'package:network_info_plus/network_info_plus.dart';
 
 class DeviceCard extends StatelessWidget {
   final String deviceName;
-  final BluetoothDevice bluetoothDevice;
+  final WiFiAccessPoint accessPointDevice;
   final bool isEunoiaDevice;
+  final bool isConnected;
 
   const DeviceCard({
     super.key,
     required this.deviceName,
-    required this.bluetoothDevice,
+    required this.accessPointDevice,
+    this.isConnected = false,
     this.isEunoiaDevice = false
   });
-
-  Future<void> goToMontior() async {
-    // Initialize bluetooth data communication 
-    if(!(await initializeEunoiaDataCommunication(bluetoothDevice))) {
-      UseToastState.showToast("Error", "Initialization with ${getBluetoothDeviceName(bluetoothDevice)} has failed.");
-      return;
-    }
-
-    // Set event listener
-    bluetoothDevice.connectionState.listen((BluetoothConnectionState state) {
-      if(state == BluetoothConnectionState.disconnected) {
-        UseBluetoothState.setConnectedState(false);
-      }
-      else if(state == BluetoothConnectionState.connected) {
-        UseBluetoothState.setConnectedState(true);
-      }
-    });
-    
-    // Set the choosen device
-    UseBluetoothState.setChoosenDevice(bluetoothDevice);
-    
-    // Change page
-    UsePageState.setPageState(PageType.monitor);
-  }
 
   Future<void> connectToDevice() async {
     if(!isEunoiaDevice) {
@@ -50,31 +30,47 @@ class DeviceCard extends StatelessWidget {
     
     final Logger logger = Logger();
 
-    // If it's already connected
-    if(bluetoothDevice.isConnected) {
-      await goToMontior();
-      return;
-    }
-
     try {
+      logger.i("CONNECTING..");
+      
       // Set connecting state to true
-      UseBluetoothState.setConnectingState(true);
+      UseWebsocketState.setConnectingState(true);
 
       // Show toast to inform user that its currently connecting
       UseToastState.showToast("Connecting", "Connecting to $deviceName");
 
       // Connect to the bluetooth device
-      await bluetoothDevice.connect(license: License.free, mtu: 512);
+      final connected = await WiFiForIoTPlugin.connect(
+        accessPointDevice.ssid,
+        bssid: accessPointDevice.bssid,
+        password: "AlafAS71jXF92mC", // optional if open network
+        security: NetworkSecurity.WPA,
+        joinOnce: true,
+        withInternet: false, // typically ESP32 softAP has no internet
+      );
+
       
       // If the bluetooth device is connected
-      if(bluetoothDevice.isConnected) {
+      if(connected) {
+        final info = NetworkInfo();
+
+        // Creatte websocket channel
+        String? gateWayIP = await info.getWifiGatewayIP();
+        if(gateWayIP == null) {
+          UseToastState.showToast("Error", "The device doesn't give default gateway IP (aww mann) :<");
+          return;
+        }
+
+        WebSocketChannel ws = WebSocketChannel.connect(Uri.parse("${gateWayIP.toString}/ws"));
+        UseWebsocketState.setChoosenChannel(ws);
+        
         // Show succeess message
         UseToastState.showToast("Success!", "Connected to $deviceName");
 
         // Wait several seconds before changing page
         await Future.delayed(Duration(seconds: 2));
         
-        await goToMontior();
+        UsePageState.setPageState(PageType.monitor);
       }
       // If its not connected
       else {
@@ -84,21 +80,20 @@ class DeviceCard extends StatelessWidget {
       logger.e('[Bluetooth] Error Connecting to the device: $e');
       UseToastState.showToast("Error", "Can't connect to $deviceName");
     } finally {
-      UseBluetoothState.setConnectingState(false);
+      UseWebsocketState.setConnectingState(false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: UseBluetoothState.connectingState,
+      listenable: UseWebsocketState.connectingState,
       builder: (BuildContext context, _) {
-
         // Create button that is depends on the status of connecting to a device or not
         return GestureDetector(
-          onTap: UseBluetoothState.connectingState.value ? () {} : connectToDevice,
+          onTap: UseWebsocketState.connectingState.value ? () {} : connectToDevice,
           child: Opacity(
-            opacity: UseBluetoothState.connectingState.value ? 0.5 : 1,
+            opacity: UseWebsocketState.connectingState.value ? 0.5 : 1,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -140,10 +135,10 @@ class DeviceCard extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              bluetoothDevice.isConnected ? "CONNECTED" : "AVAILABLE",
+                              isConnected ? "CONNECTED" : "AVAILABLE",
                               style: TextStyle(
                                 height: 1,
-                                fontWeight: bluetoothDevice.isConnected ? FontWeight.bold : FontWeight.normal,
+                                fontWeight: isConnected ? FontWeight.bold : FontWeight.normal,
                                 color: isEunoiaDevice ? Color.fromARGB(255, 112, 148, 112) : Color.fromARGB(255, 93, 73, 54),
                               ),
                             )
